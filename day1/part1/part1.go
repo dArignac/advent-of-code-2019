@@ -23,7 +23,7 @@ func CalculateRequiredFuelForMultipleMasses(masses []int) int {
 	return result
 }
 
-func LoadSpacecraftModulesFromFile() ([]int, error) {
+func LoadModulesMassesFromFile() ([]int, error) {
 	file, err := os.Open("spacecraft-modules.txt")
 	if err != nil {
 		return nil, err
