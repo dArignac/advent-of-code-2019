@@ -8,19 +8,19 @@ import (
 	"strconv"
 )
 
-func CalculateRequiredFuel(mass int) int {
+func calculateRequiredFuel(mass int) int {
 	return int(math.Floor(float64(mass/3))) - 2
 }
 
-func CalculateRequiredFuelForMultipleModules(modules []int) int {
+func calculateRequiredFuelForMultipleModules(modules []int) int {
 	result := 0
 	for _, v := range modules {
-		result += CalculateRequiredFuel(v)
+		result += calculateRequiredFuel(v)
 	}
 	return result
 }
 
-func LoadSpacecraftModulesFromFile() ([]int, error) {
+func loadSpacecraftModulesFromFile() ([]int, error) {
 	file, err := os.Open("spacecraft-modules.txt")
 	if err != nil {
 		return nil, err
@@ -39,10 +39,10 @@ func LoadSpacecraftModulesFromFile() ([]int, error) {
 
 func main() {
 	fmt.Println("Advent of Code - Day 1")
-	spacecraftModules, err := LoadSpacecraftModulesFromFile()
+	spacecraftModules, err := loadSpacecraftModulesFromFile()
 	if err != nil {
 		fmt.Println("Unable to load spacecraft modules!")
 		return
 	}
-	fmt.Println("The required fuel for all modules is:", CalculateRequiredFuelForMultipleModules(spacecraftModules))
+	fmt.Println("The required fuel for all modules is:", calculateRequiredFuelForMultipleModules(spacecraftModules))
 }
