@@ -15,14 +15,6 @@ func CalculateRequiredFuel(mass int) int {
 	return fuel
 }
 
-func CalculateRequiredFuelForMultipleMasses(masses []int) int {
-	result := 0
-	for _, mass := range masses {
-		result += CalculateRequiredFuel(mass)
-	}
-	return result
-}
-
 func LoadModulesMassesFromFile() ([]int, error) {
 	file, err := os.Open("spacecraft-modules.txt")
 	if err != nil {

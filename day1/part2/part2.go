@@ -9,11 +9,3 @@ func CalculateRequiredFuel(mass int) int {
 	}
 	return fuelSum + CalculateRequiredFuel(fuelSum)
 }
-
-func CalculateRequiredFuelForMultipleMasses(masses []int) int {
-	result := 0
-	for _, mass := range masses {
-		result += CalculateRequiredFuel(mass)
-	}
-	return result
-}
