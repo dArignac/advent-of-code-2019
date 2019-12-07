@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("Unable to load spacecraft modules!")
 		return
 	}
-	fuelPart1 := part1.CalculateRequiredFuelForMultipleModules(spacecraftModules)
+	fuelPart1 := part1.CalculateRequiredFuelForMultipleMasses(spacecraftModules)
 	fmt.Println("The required fuel for all modules is:", fuelPart1)
 
 	fmt.Println("")

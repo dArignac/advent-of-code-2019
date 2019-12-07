@@ -17,5 +17,5 @@ func TestCalculateRequiredFuel(t *testing.T) {
 
 func TestCalculateRequiredFuelForMultipleModules(t *testing.T) {
 	modules := []int{12, 14, 1969, 100756}
-	assert.Equal(t, 2+2+654+33583, CalculateRequiredFuelForMultipleModules(modules))
+	assert.Equal(t, 2+2+654+33583, CalculateRequiredFuelForMultipleMasses(modules))
 }

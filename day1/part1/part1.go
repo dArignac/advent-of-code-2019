@@ -15,10 +15,10 @@ func CalculateRequiredFuel(mass int) int {
 	return fuel
 }
 
-func CalculateRequiredFuelForMultipleModules(modules []int) int {
+func CalculateRequiredFuelForMultipleMasses(masses []int) int {
 	result := 0
-	for _, v := range modules {
-		result += CalculateRequiredFuel(v)
+	for _, mass := range masses {
+		result += CalculateRequiredFuel(mass)
 	}
 	return result
 }
