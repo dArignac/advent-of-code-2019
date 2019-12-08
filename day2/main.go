@@ -26,7 +26,6 @@ func main() {
 	code[2] = 2
 
 	// fix the code
-	// FIXME use pointer
 	code = part1.FixIntcodeProgramCode(code)
 
 	// FIXME remove

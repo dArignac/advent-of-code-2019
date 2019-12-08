@@ -48,5 +48,5 @@ func ConvertProgramCode(code string) ([]int, error) {
 // 2 - multiply first and second value
 // 99 - exit
 func FixIntcodeProgramCode(code []int) []int {
-	return []int{666}
+	return code
 }
