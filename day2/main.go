@@ -4,6 +4,8 @@ import "fmt"
 
 import "github.com/dArignac/advent-of-code-2019/day2/part1"
 
+import "github.com/dArignac/advent-of-code-2019/day2/part2"
+
 func main() {
 	fmt.Println("Advent of Code - Day 2 - Part 1")
 	fmt.Println("===============================")
@@ -30,4 +32,12 @@ func main() {
 
 	// ...and the result is:
 	fmt.Println("Value on position 0 is", code[0])
+
+	fmt.Println("")
+	fmt.Println("Advent of Code - Day 2 - Part 2")
+	fmt.Println("===============================")
+
+	noun, verb := part2.FindInputsForDesiredOutput(codeString, 19690720)
+	fmt.Println("100 * noun * verb for output 19690720")
+	fmt.Printf("Noun: %d, Verb: %d, Result: %d", noun, verb, 100*noun+verb)
 }
