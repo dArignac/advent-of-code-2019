@@ -26,10 +26,8 @@ func main() {
 	code[2] = 2
 
 	// fix the code
-	code = part1.FixIntcodeProgramCode(code)
+	code = part1.FixIntcodeProgramCode(code, 0)
 
-	// FIXME remove
-	fmt.Println(code)
-
+	// ...and the result is:
 	fmt.Println("Value on position 0 is", code[0])
 }

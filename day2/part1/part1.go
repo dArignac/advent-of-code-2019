@@ -47,6 +47,30 @@ func ConvertProgramCode(code string) ([]int, error) {
 // 1 - add first and second value
 // 2 - multiply first and second value
 // 99 - exit
-func FixIntcodeProgramCode(code []int) []int {
+//
+// After executing the opcode, step forward 4 positions and repeat.
+func FixIntcodeProgramCode(code []int, start int) []int {
+	opcode := code[start]
+
+	if opcode == 99 {
+		return code
+	}
+
+	value1 := code[code[start+1]]
+	value2 := code[code[start+2]]
+	targetPosition := code[start+3]
+	nextStart := start + 4
+	length := len(code)
+
+	switch opcode {
+	case 1:
+		code[targetPosition] = value1 + value2
+	case 2:
+		code[targetPosition] = value1 * value2
+	}
+
+	if nextStart < length {
+		code = FixIntcodeProgramCode(code, nextStart)
+	}
 	return code
 }

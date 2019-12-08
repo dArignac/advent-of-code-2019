@@ -11,5 +11,6 @@ To execute the tests run `go ./...` from the root or any day folder to just run 
 | Day  | Part One | Part Two | 
 |---|:---:|:---:|
 | [Day 1: The Tyranny of the Rocket Equation](https://github.com/dArignac/advent-of-code-2019/tree/master/day1) | 👌🏻 | 👌🏻 |
+| [Day 2: 1202 Program Alarm](https://github.com/dArignac/advent-of-code-2019/tree/master/day2) | 👌🏻 | ⏳ |
 
 ![](https://media.giphy.com/media/3oz8xIGBOOz0fJuY2k/source.gif)
