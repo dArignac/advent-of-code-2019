@@ -6,4 +6,10 @@ I'm starting to learn the language [Go](https://golang.org/) by solving the task
 ## Tests
 To execute the tests run `go ./...` from the root or any day folder to just run the tests for the day.
 
-![](https://media.giphy.com/media/peRS4JYI44Ltu/source.gif)
+## Progress
+
+| Day  | Part One | Part Two | 
+|---|:---:|:---:|
+| [Day 1: The Tyranny of the Rocket Equation](https://github.com/dArignac/advent-of-code-2019/tree/master/day1) | 👌🏻 | 👌🏻 |
+
+![](https://media.giphy.com/media/3oz8xIGBOOz0fJuY2k/source.gif)
