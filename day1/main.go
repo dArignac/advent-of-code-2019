@@ -24,7 +24,6 @@ func main() {
 		fmt.Println("Unable to load spacecraft modules!")
 		return
 	}
-	//fuelPart1 := part1.CalculateRequiredFuelForMultipleMasses(masses)
 	fuelPart1 := runCalculationFunctionForMasses(part1.CalculateRequiredFuel, masses)
 	fmt.Println("The required fuel for all modules is:", fuelPart1)
 
