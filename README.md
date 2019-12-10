@@ -3,6 +3,8 @@ I'm starting to learn the language [Go](https://golang.org/) by solving the task
 
 [Adrienne Tacke](http://adrienne.io/)'s tweets about this brought me to doing this, check out her solutions using javascript at [her Github repo](https://github.com/adriennetacke/advent-of-code-2019).
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/dArignac/advent-of-code-2019)](https://goreportcard.com/report/github.com/dArignac/advent-of-code-2019)
+
 ## Tests
 To execute the tests run `go ./...` from the root or any day folder to just run the tests for the day.
 
