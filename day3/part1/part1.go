@@ -16,9 +16,20 @@ type path struct {
 
 // CalculateNearestCrossingDistance calculates the distance to the shortest crossing
 func CalculateNearestCrossingDistance(lines []string) int {
+	for _, line := range lines {
+		_, err := splitInputToPath(line)
+		if err != nil {
+			return -1
+		}
+	}
 	return 0
 }
 
+// TODO transfer to a matrix (use array or struct)
+// TODO on insertion check for crossings and remember
+// TODO calculate distances for crossings and return the shortest
+
+// splitInputToPath splits the given string into "path" instances
 func splitInputToPath(input string) ([]path, error) {
 	var paths []path
 	elements := strings.Split(input, ",")
@@ -31,8 +42,3 @@ func splitInputToPath(input string) ([]path, error) {
 	}
 	return paths, nil
 }
-
-// TODO split string to elements (use a struct?)
-// TODO transfer to a matrix (use array or struct)
-// TODO on insertion check for crossings and remember
-// TODO calculate distances for crossings and return the shortest

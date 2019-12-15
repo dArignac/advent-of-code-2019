@@ -14,7 +14,7 @@ func TestCalculateNearestCrossingDistance(t *testing.T) {
 }
 
 func TestSplitInputToPath(t *testing.T) {
-	r1, e1 := splitInputToPath("R1,L2")
+	r1, e1 := splitInputToPath("R1,L2,X99")
 	assert.Nil(t, e1)
-	assert.Equal(t, r1, []path{path{"R", 1}, path{"L", 2}})
+	assert.Equal(t, r1, []path{path{"R", 1}, path{"L", 2}, path{"X", 99}})
 }
