@@ -1,8 +1,8 @@
 package part1
 
 import (
-	"strings"
 	"strconv"
+	"strings"
 )
 
 // find crossings
@@ -11,7 +11,7 @@ import (
 
 type path struct {
 	direction string
-	length int
+	length    int
 }
 
 // CalculateNearestCrossingDistance calculates the distance to the shortest crossing
@@ -22,7 +22,7 @@ func CalculateNearestCrossingDistance(lines []string) int {
 func splitInputToPath(input string) ([]path, error) {
 	var paths []path
 	elements := strings.Split(input, ",")
-	for _,v := range(elements) {
+	for _, v := range elements {
 		length, err := strconv.Atoi(v[1:])
 		if err != nil {
 			return nil, err
