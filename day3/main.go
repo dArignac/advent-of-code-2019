@@ -41,15 +41,22 @@ func main() {
 		fmt.Println("Tranforming instructions for wire 1 to coordinates failed")
 		return
 	}
+	fmt.Println("Wire one contains", len(coordinatesWire0), "coordinates")
+
 	coordinatesWire1, err := part1.WireInstructionsToCoordinates(input[1])
 	if err != nil {
 		fmt.Println("Tranforming instructions for wire 2 to coordinates failed")
 		return
 	}
+	fmt.Println("Wire two contains", len(coordinatesWire1), "coordinates")
+
+	// get the crossings
+	crossings := part1.GetCrossings(coordinatesWire0, coordinatesWire1)
+	fmt.Println("Found", len(crossings), "crossings between the 2 wires")
 
 	// calculate the nearest crossing distance
-	distance := part1.CalculateNearestCrossingDistance(coordinatesWire0, coordinatesWire1)
-	if distance == -1 || distance == 0 {
+	distance := part1.GetNearestCrossingWithDistance(crossings)
+	if distance == -1.0 || distance == 0.0 {
 		fmt.Println("Calculation failed, distance was", distance)
 	}
 	fmt.Println("The shortest distance is", distance)

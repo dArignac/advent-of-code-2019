@@ -5,22 +5,22 @@ import (
 	"testing"
 )
 
-func TestCalculateNearestCrossingDistance(t *testing.T) {
+func TestGetNearestCrossingWithDistance(t *testing.T) {
 	w0, err0 := WireInstructionsToCoordinates("R75,D30,R83,U83,L12,D49,R71,U7,L72")
 	w1, err1 := WireInstructionsToCoordinates("U62,R66,U55,R34,D71,R55,D58,R83")
 	assert.Nil(t, err0)
 	assert.Nil(t, err1)
 
-	d1 := CalculateNearestCrossingDistance(w0, w1)
-	assert.Equal(t, d1, 159)
+	r1 := GetNearestCrossingWithDistance(GetCrossings(w0, w1))
+	assert.Equal(t, 159.0, r1)
 
 	w0, err0 = WireInstructionsToCoordinates("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51")
 	w1, err1 = WireInstructionsToCoordinates("U98,R91,D20,R16,D67,R40,U7,R15,U6,R7")
 	assert.Nil(t, err0)
 	assert.Nil(t, err1)
 
-	d2 := CalculateNearestCrossingDistance(w0, w1)
-	assert.Equal(t, d2, 135)
+	r2 := GetNearestCrossingWithDistance(GetCrossings(w0, w1))
+	assert.Equal(t, 135.0, r2)
 }
 
 func TestSplitInputToPath(t *testing.T) {
@@ -100,21 +100,19 @@ func TestInsertPathCoordinates(t *testing.T) {
 	assert.Panics(t, func() { insertPathCoordinates(p1, []Point{}) })
 }
 
-func TestGetNearestCrossingWithDistance(t *testing.T) {
-	c1 := []Point{{x: -100, y: 2}, {x: 100, y: 1}}
-	p1, d1 := getNearestCrossingWithDistance(c1)
-	assert.Equal(t, Point{x: 100, y: 1}, p1)
-	assert.Equal(t, 101.0, d1)
-
-	c2 := []Point{{x: -5, y: -30}, {x: 7, y: -11}, {x: 17, y: -55}}
-	p2, d2 := getNearestCrossingWithDistance(c2)
-	assert.Equal(t, Point{x: 7, y: -11}, p2)
-	assert.Equal(t, 18.0, d2)
-}
-
 func TestWireInstructionsToCoordinates(t *testing.T) {
 	result1, error1 := WireInstructionsToCoordinates("U1,R1,D1,L1")
 	expected1 := []Point{{x: 0, y: 0}, {x: 0, y: 1}, {x: 1, y: 1}, {x: 1, y: 0}, {x: 0, y: 0}}
 	assert.Nil(t, error1)
 	assert.Equal(t, expected1, result1)
+}
+
+func TestGetCrossings(t *testing.T) {
+	w1 := []Point{{0, 0}, {0, 1}, {1, 1}, {2, 1}, {2, 2}, {2, 3}}
+	w2 := []Point{{0, 0}, {1, 0}, {1, 1}, {1, 2}, {2, 2}, {3, 2}}
+
+	c1 := GetCrossings(w1, w2)
+	e1 := []Point{{1, 1}, {2, 2}}
+
+	assert.Equal(t, e1, c1)
 }

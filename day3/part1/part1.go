@@ -1,7 +1,6 @@
 package part1
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -18,27 +17,37 @@ type Point struct {
 	y int16
 }
 
-// CalculateNearestCrossingDistance calculates the distance to the shortest crossing
-func CalculateNearestCrossingDistance(coordinatesWire0 []Point, coordinatesWire1 []Point) int {
-	fmt.Println("Wire one contains", len(coordinatesWire0), "coordinates")
-	fmt.Println("Wire two contains", len(coordinatesWire1), "coordinates")
+// GetNearestCrossingWithDistance returns the manhattan distance of nearest crossing point.
+func GetNearestCrossingWithDistance(crossings []Point) float64 {
+	nearestDistance := -1.0
 
-	// calculate crossings by checking if wire 2 has any points that also occure in wire 1
-	var crossings []Point
+	for _, point := range crossings {
+		distance := math.Abs(float64(point.x)) + math.Abs(float64(point.y))
+		if nearestDistance == -1.0 {
+			nearestDistance = distance
+		} else {
+			if distance < nearestDistance {
+				nearestDistance = distance
+			}
+		}
+	}
+	return nearestDistance
+}
+
+// GetCrossings finds the Points that both wire coordinates have in common aka the crossings.
+func GetCrossings(coordinatesWire0 []Point, coordinatesWire1 []Point) (crossings []Point) {
+	crossings = []Point{}
+
 	for _, point := range coordinatesWire1 {
 		if containsElement(coordinatesWire0, point) {
 			crossings = append(crossings, point)
 		}
 	}
+
 	// remove first element as this is the starting point 0,0
 	crossings = crossings[1:]
 
-	fmt.Println("Found", len(crossings), "crossings between the 2 wires")
-
-	// calculate taxi distance for existing crossing, return the shortest
-	_, distance := getNearestCrossingWithDistance(crossings)
-
-	return int(distance)
+	return
 }
 
 // WireInstructionsToCoordinates takes stringified instructions for a wire and transforms them to coordinates reflected by the Point struct.
@@ -55,24 +64,6 @@ func WireInstructionsToCoordinates(instructions string) ([]Point, error) {
 	}
 
 	return coordinates, nil
-}
-
-func getNearestCrossingWithDistance(crossings []Point) (Point, float64) {
-	var nearestPoint Point
-	nearestDistance := -1.0
-
-	for _, point := range crossings {
-		distance := math.Abs(float64(point.x)) + math.Abs(float64(point.y))
-		if nearestDistance == -1.0 {
-			nearestDistance = distance
-		} else {
-			if distance < nearestDistance {
-				nearestPoint = point
-				nearestDistance = distance
-			}
-		}
-	}
-	return nearestPoint, nearestDistance
 }
 
 func containsElement(haystack []Point, needle Point) bool {
