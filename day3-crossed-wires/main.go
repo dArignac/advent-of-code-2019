@@ -64,6 +64,6 @@ func main() {
 	fmt.Println("Advent of Code - Day 3 - Part 2")
 	fmt.Println("===============================")
 
-	steps := day3.CalculateShortestStepCrossing()
+	steps := day3.GetShortestStepCrossing(crossingPoints)
 	fmt.Println("Shorted steps required are", steps, "steps.")
 }

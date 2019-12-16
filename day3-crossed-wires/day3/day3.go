@@ -40,19 +40,31 @@ func GetNearestCrossingWithDistance(crossings []CrossingPoint) float64 {
 	return nearestDistance
 }
 
-// CalculateShortestStepCrossing calculates the crossing that is reached with the shortes amount of steps
-func CalculateShortestStepCrossing() int {
-	// FIXME implement
-	return 0
+// GetShortestStepCrossing calculates the crossing that is reached with the shortes amount of steps
+func GetShortestStepCrossing(crossings []CrossingPoint) int {
+	var steps int
+
+	for idx, cp := range crossings {
+		if idx == 0 {
+			steps = cp.steps
+		} else {
+			if cp.steps < steps {
+				steps = cp.steps
+			}
+		}
+	}
+
+	return steps
 }
 
 // GetCrossings finds the Points that both wire coordinates have in common aka the crossings.
 func GetCrossings(coordinatesWire0 []Point, coordinatesWire1 []Point) (crossings []CrossingPoint) {
 	crossings = []CrossingPoint{}
 
-	for _, point := range coordinatesWire1 {
-		if containsElement(coordinatesWire0, point) {
-			crossings = append(crossings, CrossingPoint{point: point, steps: 0})
+	for idx, point := range coordinatesWire1 {
+		found, position := containsElement(coordinatesWire0, point)
+		if found {
+			crossings = append(crossings, CrossingPoint{point: point, steps: position + idx})
 		}
 	}
 
@@ -78,13 +90,14 @@ func WireInstructionsToCoordinates(instructions string) ([]Point, error) {
 	return coordinates, nil
 }
 
-func containsElement(haystack []Point, needle Point) bool {
-	for _, element := range haystack {
+// containsElement checks if the given needle is found in the haystack and at which position
+func containsElement(haystack []Point, needle Point) (bool, int) {
+	for idx, element := range haystack {
 		if element.x == needle.x && element.y == needle.y {
-			return true
+			return true, idx
 		}
 	}
-	return false
+	return false, -1
 }
 
 // insertPathCoordinates creates points from the paths and inserts them into coordinates

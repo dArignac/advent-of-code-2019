@@ -24,8 +24,22 @@ func TestGetNearestCrossingWithDistance(t *testing.T) {
 	assert.Equal(t, 135.0, r2)
 }
 
-func TestCalculateShortestStepCrossing(t *testing.T) {
-	// FIXME impl
+func TestGetShortestStepCrossing(t *testing.T) {
+	w0, err0 := WireInstructionsToCoordinates("R75,D30,R83,U83,L12,D49,R71,U7,L72")
+	w1, err1 := WireInstructionsToCoordinates("U62,R66,U55,R34,D71,R55,D58,R83")
+	assert.Nil(t, err0)
+	assert.Nil(t, err1)
+
+	r := GetShortestStepCrossing(GetCrossings(w0, w1))
+	assert.Equal(t, 610, r)
+
+	w0, err0 = WireInstructionsToCoordinates("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51")
+	w1, err1 = WireInstructionsToCoordinates("U98,R91,D20,R16,D67,R40,U7,R15,U6,R7")
+	assert.Nil(t, err0)
+	assert.Nil(t, err1)
+
+	r = GetShortestStepCrossing(GetCrossings(w0, w1))
+	assert.Equal(t, 410, r)
 }
 
 func TestSplitInputToPath(t *testing.T) {
@@ -85,14 +99,20 @@ func TestPathToPoint(t *testing.T) {
 }
 
 func TestContainsElement(t *testing.T) {
-	h1 := []Point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
-	assert.True(t, containsElement(h1, Point{x: 5, y: 4}))
+	haystack := []Point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
+	found, pos := containsElement(haystack, Point{x: 5, y: 4})
+	assert.True(t, found)
+	assert.Equal(t, 1, pos)
 
-	h2 := []Point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
-	assert.False(t, containsElement(h2, Point{x: 7, y: -4}))
+	haystack = []Point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
+	found, pos = containsElement(haystack, Point{x: 7, y: -4})
+	assert.False(t, found)
+	assert.Equal(t, -1, pos)
 
-	h3 := []Point{{x: -7, y: 9}, {x: -166, y: 18}, {x: -77, y: -3}}
-	assert.True(t, containsElement(h3, Point{x: -77, y: -3}))
+	haystack = []Point{{x: -7, y: 9}, {x: -166, y: 18}, {x: -77, y: -3}}
+	found, pos = containsElement(haystack, Point{x: -77, y: -3})
+	assert.True(t, found)
+	assert.Equal(t, 2, pos)
 }
 
 func TestInsertPathCoordinates(t *testing.T) {
@@ -117,7 +137,7 @@ func TestGetCrossings(t *testing.T) {
 	w2 := []Point{{0, 0}, {1, 0}, {1, 1}, {1, 2}, {2, 2}, {3, 2}}
 
 	c1 := GetCrossings(w1, w2)
-	e1 := []CrossingPoint{{point: Point{1, 1}, steps: 0}, {point: Point{2, 2}, steps: 0}}
+	e1 := []CrossingPoint{{point: Point{1, 1}, steps: 4}, {point: Point{2, 2}, steps: 8}}
 
 	assert.Equal(t, e1, c1)
 }
