@@ -112,7 +112,7 @@ func TestGetCrossings(t *testing.T) {
 	w2 := []Point{{0, 0}, {1, 0}, {1, 1}, {1, 2}, {2, 2}, {3, 2}}
 
 	c1 := GetCrossings(w1, w2)
-	e1 := []Point{{1, 1}, {2, 2}}
+	e1 := []CrossingPoint{{point: Point{1, 1}, steps: 0}, {point: Point{2, 2}, steps: 0}}
 
 	assert.Equal(t, e1, c1)
 }

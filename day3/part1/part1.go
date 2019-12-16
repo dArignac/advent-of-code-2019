@@ -17,12 +17,18 @@ type Point struct {
 	y int16
 }
 
+// CrossingPoint reflect the coordinate where 2 wires cross. Steps holds the steps for both wires to reach the crossing.
+type CrossingPoint struct {
+	point Point
+	steps int
+}
+
 // GetNearestCrossingWithDistance returns the manhattan distance of nearest crossing point.
-func GetNearestCrossingWithDistance(crossings []Point) float64 {
+func GetNearestCrossingWithDistance(crossings []CrossingPoint) float64 {
 	nearestDistance := -1.0
 
-	for _, point := range crossings {
-		distance := math.Abs(float64(point.x)) + math.Abs(float64(point.y))
+	for _, crossingPoint := range crossings {
+		distance := math.Abs(float64(crossingPoint.point.x)) + math.Abs(float64(crossingPoint.point.y))
 		if nearestDistance == -1.0 {
 			nearestDistance = distance
 		} else {
@@ -35,12 +41,12 @@ func GetNearestCrossingWithDistance(crossings []Point) float64 {
 }
 
 // GetCrossings finds the Points that both wire coordinates have in common aka the crossings.
-func GetCrossings(coordinatesWire0 []Point, coordinatesWire1 []Point) (crossings []Point) {
-	crossings = []Point{}
+func GetCrossings(coordinatesWire0 []Point, coordinatesWire1 []Point) (crossings []CrossingPoint) {
+	crossings = []CrossingPoint{}
 
 	for _, point := range coordinatesWire1 {
 		if containsElement(coordinatesWire0, point) {
-			crossings = append(crossings, point)
+			crossings = append(crossings, CrossingPoint{point: point, steps: 0})
 		}
 	}
 
