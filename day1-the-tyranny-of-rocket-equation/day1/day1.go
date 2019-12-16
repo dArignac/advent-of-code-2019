@@ -1,4 +1,4 @@
-package part1
+package day1
 
 import (
 	"bufio"
@@ -13,6 +13,22 @@ func CalculateRequiredFuel(mass int) int {
 		return 0
 	}
 	return fuel
+}
+
+func CalculateRequiredFuelWithRecursion(mass int) int {
+	fuelSum := CalculateRequiredFuel(mass)
+	if fuelSum <= 0 {
+		return fuelSum
+	}
+	return fuelSum + CalculateRequiredFuelWithRecursion(fuelSum)
+}
+
+func RunCalculationFunctionForMasses(calculation func(int) int, masses []int) int {
+	result := 0
+	for _, mass := range masses {
+		result += calculation(mass)
+	}
+	return result
 }
 
 func LoadModulesMassesFromFile() ([]int, error) {
