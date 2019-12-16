@@ -81,7 +81,7 @@ func FixIntcodeProgramCode(code []int, start int) []int {
 
 // FindInputsForDesiredOutput searches the input values to get the given output.
 func FindInputsForDesiredOutput(intCode string, output int) (int, int) {
-	// grab the inital Intcode
+	// grab the initial Intcode
 	// convert inputs to []int slice
 	code, err := ConvertProgramCode(intCode)
 	if err != nil {
