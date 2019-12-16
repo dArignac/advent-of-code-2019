@@ -68,3 +68,24 @@ func TestPathToPoint(t *testing.T) {
 	r8 := pathToPoints(p8, s8)
 	assert.Equal(t, e8, r8)
 }
+
+func TestContainsElement(t *testing.T) {
+	h1 := []point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
+	assert.True(t, containsElement(h1, point{x: 5, y: 4}))
+
+	h2 := []point{{x: 3, y: 4}, {x: 5, y: 4}, {x: 77, y: -3}}
+	assert.False(t, containsElement(h2, point{x: 7, y: -4}))
+
+	h3 := []point{{x: -7, y: 9}, {x: -166, y: 18}, {x: -77, y: -3}}
+	assert.True(t, containsElement(h3, point{x: -77, y: -3}))
+}
+
+func TestInsertPathCoordinates(t *testing.T) {
+	p1 := path{direction: "U", length: 2}
+	p2 := []point{{x: 7, y: 3}, {x: 8, y: 3}}
+	e1 := []point{{x: 7, y: 3}, {x: 8, y: 3}, {x: 8, y: 4}, {x: 8, y: 5}}
+	assert.Equal(t, e1, insertPathCoordinates(p1, p2))
+
+	// the coordinates need at least one element
+	assert.Panics(t, func() { insertPathCoordinates(p1, []point{}) })
+}

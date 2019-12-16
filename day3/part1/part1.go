@@ -1,6 +1,7 @@
 package part1
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -17,29 +18,46 @@ type point struct {
 
 // CalculateNearestCrossingDistance calculates the distance to the shortest crossing
 func CalculateNearestCrossingDistance(wires []string) int {
-	coordinates := []point{{x: 0, y: 0}}
-	var crossings []point
+	coordinates := [][]point{{{x: 0, y: 0}}, {{x: 0, y: 0}}}
 
-	for _, wire := range wires {
+	for idx, wire := range wires {
 		paths, err := splitInputToPath(wire)
 		if err != nil {
 			return -1
 		}
 
 		for _, path := range paths {
-			insertPathCoordinates(path, &coordinates, &crossings)
+			coordinates[idx] = insertPathCoordinates(path, coordinates[idx])
 		}
 	}
+
+	fmt.Println("Wire one contains", len(coordinates[0]), "coordinates")
+	fmt.Println("Wire two contains", len(coordinates[1]), "coordinates")
 
 	// FIXME calculate taxi distance for existing crossing, return the shortest
 
 	return 0
 }
 
-func insertPathCoordinates(path path, coordinates *[]point, crossings *[]point) {
+// insertPathCoordinates creates points from the paths and inserts them into coordinates
+func insertPathCoordinates(path path, coordinates []point) []point {
 	// create points slice from path
-	// check if any of the points exists, that then marks a crossing, add this to crossing
-	// add the points to the coordinates
+	points := pathToPoints(path, coordinates[len(coordinates)-1])
+
+	for _, point := range points {
+		coordinates = append(coordinates, point)
+	}
+
+	return coordinates
+}
+
+func containsElement(haystack []point, needle point) bool {
+	for _, element := range haystack {
+		if element.x == needle.x && element.y == needle.y {
+			return true
+		}
+	}
+	return false
 }
 
 func pathToPoints(path path, start point) []point {
