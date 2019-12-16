@@ -36,7 +36,7 @@ func main() {
 
 	distance := part1.CalculateNearestCrossingDistance(input)
 	if distance == -1 || distance == 0 {
-		fmt.Println("Calculation failed")
+		fmt.Println("Calculation failed, distance was", distance)
 	}
 	fmt.Println("The shortest distance is", distance)
 }

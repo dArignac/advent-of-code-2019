@@ -10,7 +10,7 @@ func TestCalculateNearestCrossingDistance(t *testing.T) {
 	assert.Equal(t, CalculateNearestCrossingDistance(input), 159)
 
 	input = []string{"R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51", "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"}
-	assert.Equal(t, CalculateNearestCrossingDistance(input), 137)
+	assert.Equal(t, CalculateNearestCrossingDistance(input), 135)
 }
 
 func TestSplitInputToPath(t *testing.T) {
@@ -88,4 +88,16 @@ func TestInsertPathCoordinates(t *testing.T) {
 
 	// the coordinates need at least one element
 	assert.Panics(t, func() { insertPathCoordinates(p1, []point{}) })
+}
+
+func TestGetNearestCrossingWithDistance(t *testing.T) {
+	c1 := []point{{x: -100, y: 2}, {x: 100, y: 1}}
+	p1, d1 := getNearestCrossingWithDistance(c1)
+	assert.Equal(t, point{x: 100, y: 1}, p1)
+	assert.Equal(t, 101.0, d1)
+
+	c2 := []point{{x: -5, y: -30}, {x: 7, y: -11}, {x: 17, y: -55}}
+	p2, d2 := getNearestCrossingWithDistance(c2)
+	assert.Equal(t, point{x: 7, y: -11}, p2)
+	assert.Equal(t, 18.0, d2)
 }

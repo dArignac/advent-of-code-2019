@@ -2,6 +2,7 @@ package part1
 
 import (
 	"fmt"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -41,11 +42,33 @@ func CalculateNearestCrossingDistance(wires []string) int {
 			crossings = append(crossings, point)
 		}
 	}
+	// remove first element as this is the starting point 0,0
+	crossings = crossings[1:]
+
 	fmt.Println("Found", len(crossings), "crossings between the 2 wires")
 
-	// FIXME calculate taxi distance for existing crossing, return the shortest
+	// calculate taxi distance for existing crossing, return the shortest
+	_, distance := getNearestCrossingWithDistance(crossings)
 
-	return 0
+	return int(distance)
+}
+
+func getNearestCrossingWithDistance(crossings []point) (point, float64) {
+	var nearestPoint point
+	nearestDistance := -1.0
+
+	for _, point := range crossings {
+		distance := math.Abs(float64(point.x)) + math.Abs(float64(point.y))
+		if nearestDistance == -1.0 {
+			nearestDistance = distance
+		} else {
+			if distance < nearestDistance {
+				nearestPoint = point
+				nearestDistance = distance
+			}
+		}
+	}
+	return nearestPoint, nearestDistance
 }
 
 func containsElement(haystack []point, needle point) bool {
