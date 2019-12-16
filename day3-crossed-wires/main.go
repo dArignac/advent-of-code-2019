@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dArignac/advent-of-code-2019/day3/part1"
-	"github.com/dArignac/advent-of-code-2019/day3/part2"
+	"github.com/dArignac/advent-of-code-2019/day3-crossed-wires/day3"
 )
 
 func loadInput() ([]string, error) {
@@ -36,14 +35,14 @@ func main() {
 	}
 
 	// transform wire instructions to coordinate
-	coordinatesWire0, err := part1.WireInstructionsToCoordinates(input[0])
+	coordinatesWire0, err := day3.WireInstructionsToCoordinates(input[0])
 	if err != nil {
 		fmt.Println("Tranforming instructions for wire 1 to coordinates failed")
 		return
 	}
 	fmt.Println("Wire one contains", len(coordinatesWire0), "coordinates")
 
-	coordinatesWire1, err := part1.WireInstructionsToCoordinates(input[1])
+	coordinatesWire1, err := day3.WireInstructionsToCoordinates(input[1])
 	if err != nil {
 		fmt.Println("Tranforming instructions for wire 2 to coordinates failed")
 		return
@@ -51,11 +50,11 @@ func main() {
 	fmt.Println("Wire two contains", len(coordinatesWire1), "coordinates")
 
 	// get the crossings
-	crossingPoints := part1.GetCrossings(coordinatesWire0, coordinatesWire1)
+	crossingPoints := day3.GetCrossings(coordinatesWire0, coordinatesWire1)
 	fmt.Println("Found", len(crossingPoints), "crossings between the 2 wires")
 
 	// calculate the nearest crossing distance
-	distance := part1.GetNearestCrossingWithDistance(crossingPoints)
+	distance := day3.GetNearestCrossingWithDistance(crossingPoints)
 	if distance == -1.0 || distance == 0.0 {
 		fmt.Println("Calculation failed, distance was", distance)
 	}
@@ -65,6 +64,6 @@ func main() {
 	fmt.Println("Advent of Code - Day 3 - Part 2")
 	fmt.Println("===============================")
 
-	steps := part2.CalculateShortestStepCrossing()
+	steps := day3.CalculateShortestStepCrossing()
 	fmt.Println("Shorted steps required are", steps, "steps.")
 }

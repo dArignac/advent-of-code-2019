@@ -1,8 +1,9 @@
-package part1
+package day3
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetNearestCrossingWithDistance(t *testing.T) {
@@ -21,6 +22,10 @@ func TestGetNearestCrossingWithDistance(t *testing.T) {
 
 	r2 := GetNearestCrossingWithDistance(GetCrossings(w0, w1))
 	assert.Equal(t, 135.0, r2)
+}
+
+func TestCalculateShortestStepCrossing(t *testing.T) {
+	// FIXME impl
 }
 
 func TestSplitInputToPath(t *testing.T) {

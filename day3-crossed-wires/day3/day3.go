@@ -1,4 +1,4 @@
-package part1
+package day3
 
 import (
 	"math"
@@ -38,6 +38,12 @@ func GetNearestCrossingWithDistance(crossings []CrossingPoint) float64 {
 		}
 	}
 	return nearestDistance
+}
+
+// CalculateShortestStepCrossing calculates the crossing that is reached with the shortes amount of steps
+func CalculateShortestStepCrossing() int {
+	// FIXME implement
+	return 0
 }
 
 // GetCrossings finds the Points that both wire coordinates have in common aka the crossings.
