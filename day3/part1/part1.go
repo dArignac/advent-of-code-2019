@@ -34,9 +34,27 @@ func CalculateNearestCrossingDistance(wires []string) int {
 	fmt.Println("Wire one contains", len(coordinates[0]), "coordinates")
 	fmt.Println("Wire two contains", len(coordinates[1]), "coordinates")
 
+	// calculate crossings by checking if wire 2 has any points that also occure in wire 1
+	var crossings []point
+	for _, point := range coordinates[1] {
+		if containsElement(coordinates[0], point) {
+			crossings = append(crossings, point)
+		}
+	}
+	fmt.Println("Found", len(crossings), "crossings between the 2 wires")
+
 	// FIXME calculate taxi distance for existing crossing, return the shortest
 
 	return 0
+}
+
+func containsElement(haystack []point, needle point) bool {
+	for _, element := range haystack {
+		if element.x == needle.x && element.y == needle.y {
+			return true
+		}
+	}
+	return false
 }
 
 // insertPathCoordinates creates points from the paths and inserts them into coordinates
@@ -49,15 +67,6 @@ func insertPathCoordinates(path path, coordinates []point) []point {
 	}
 
 	return coordinates
-}
-
-func containsElement(haystack []point, needle point) bool {
-	for _, element := range haystack {
-		if element.x == needle.x && element.y == needle.y {
-			return true
-		}
-	}
-	return false
 }
 
 func pathToPoints(path path, start point) []point {
