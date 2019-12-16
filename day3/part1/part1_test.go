@@ -6,12 +6,20 @@ import (
 )
 
 func TestCalculateNearestCrossingDistance(t *testing.T) {
-	input := []string{"R75,D30,R83,U83,L12,D49,R71,U7,L72", "U62,R66,U55,R34,D71,R55,D58,R83"}
-	d1, _ := CalculateNearestCrossingDistance(input)
+	w0, err0 := WireInstructionsToCoordinates("R75,D30,R83,U83,L12,D49,R71,U7,L72")
+	w1, err1 := WireInstructionsToCoordinates("U62,R66,U55,R34,D71,R55,D58,R83")
+	assert.Nil(t, err0)
+	assert.Nil(t, err1)
+
+	d1 := CalculateNearestCrossingDistance(w0, w1)
 	assert.Equal(t, d1, 159)
 
-	input = []string{"R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51", "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"}
-	d2, _ := CalculateNearestCrossingDistance(input)
+	w0, err0 = WireInstructionsToCoordinates("R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51")
+	w1, err1 = WireInstructionsToCoordinates("U98,R91,D20,R16,D67,R40,U7,R15,U6,R7")
+	assert.Nil(t, err0)
+	assert.Nil(t, err1)
+
+	d2 := CalculateNearestCrossingDistance(w0, w1)
 	assert.Equal(t, d2, 135)
 }
 
@@ -102,4 +110,11 @@ func TestGetNearestCrossingWithDistance(t *testing.T) {
 	p2, d2 := getNearestCrossingWithDistance(c2)
 	assert.Equal(t, Point{x: 7, y: -11}, p2)
 	assert.Equal(t, 18.0, d2)
+}
+
+func TestWireInstructionsToCoordinates(t *testing.T) {
+	result1, error1 := WireInstructionsToCoordinates("U1,R1,D1,L1")
+	expected1 := []Point{{x: 0, y: 0}, {x: 0, y: 1}, {x: 1, y: 1}, {x: 1, y: 0}, {x: 0, y: 0}}
+	assert.Nil(t, error1)
+	assert.Equal(t, expected1, result1)
 }

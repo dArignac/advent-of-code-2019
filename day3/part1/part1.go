@@ -19,27 +19,14 @@ type Point struct {
 }
 
 // CalculateNearestCrossingDistance calculates the distance to the shortest crossing
-func CalculateNearestCrossingDistance(wires []string) (int, []Point) {
-	coordinates := [][]Point{{{x: 0, y: 0}}, {{x: 0, y: 0}}}
-
-	for idx, wire := range wires {
-		paths, err := splitInputToPath(wire)
-		if err != nil {
-			return -1, nil
-		}
-
-		for _, path := range paths {
-			coordinates[idx] = insertPathCoordinates(path, coordinates[idx])
-		}
-	}
-
-	fmt.Println("Wire one contains", len(coordinates[0]), "coordinates")
-	fmt.Println("Wire two contains", len(coordinates[1]), "coordinates")
+func CalculateNearestCrossingDistance(coordinatesWire0 []Point, coordinatesWire1 []Point) int {
+	fmt.Println("Wire one contains", len(coordinatesWire0), "coordinates")
+	fmt.Println("Wire two contains", len(coordinatesWire1), "coordinates")
 
 	// calculate crossings by checking if wire 2 has any points that also occure in wire 1
 	var crossings []Point
-	for _, point := range coordinates[1] {
-		if containsElement(coordinates[0], point) {
+	for _, point := range coordinatesWire1 {
+		if containsElement(coordinatesWire0, point) {
 			crossings = append(crossings, point)
 		}
 	}
@@ -51,7 +38,23 @@ func CalculateNearestCrossingDistance(wires []string) (int, []Point) {
 	// calculate taxi distance for existing crossing, return the shortest
 	_, distance := getNearestCrossingWithDistance(crossings)
 
-	return int(distance), crossings
+	return int(distance)
+}
+
+// WireInstructionsToCoordinates takes stringified instructions for a wire and transforms them to coordinates reflected by the Point struct.
+func WireInstructionsToCoordinates(instructions string) ([]Point, error) {
+	coordinates := []Point{{x: 0, y: 0}}
+
+	paths, err := splitInputToPath(instructions)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, path := range paths {
+		coordinates = insertPathCoordinates(path, coordinates)
+	}
+
+	return coordinates, nil
 }
 
 func getNearestCrossingWithDistance(crossings []Point) (Point, float64) {
