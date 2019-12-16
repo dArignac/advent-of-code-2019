@@ -7,6 +7,7 @@ import (
 	"strconv"
 )
 
+// CalculateRequiredFuel returns the required fuel for the given mass.
 func CalculateRequiredFuel(mass int) int {
 	fuel := int(math.Floor(float64(mass/3))) - 2
 	if fuel < 0 {
@@ -15,6 +16,7 @@ func CalculateRequiredFuel(mass int) int {
 	return fuel
 }
 
+// CalculateRequiredFuelWithRecursion returns the required fuel for the given mass and takes the mass of the fuel itself into account.
 func CalculateRequiredFuelWithRecursion(mass int) int {
 	fuelSum := CalculateRequiredFuel(mass)
 	if fuelSum <= 0 {
@@ -23,6 +25,7 @@ func CalculateRequiredFuelWithRecursion(mass int) int {
 	return fuelSum + CalculateRequiredFuelWithRecursion(fuelSum)
 }
 
+// RunCalculationFunctionForMasses runs the given function for each element of the given masses and sums the return values.
 func RunCalculationFunctionForMasses(calculation func(int) int, masses []int) int {
 	result := 0
 	for _, mass := range masses {
@@ -31,6 +34,7 @@ func RunCalculationFunctionForMasses(calculation func(int) int, masses []int) in
 	return result
 }
 
+// LoadModulesMassesFromFile loads the input file and returns the masses as int array.
 func LoadModulesMassesFromFile() ([]int, error) {
 	file, err := os.Open("spacecraft-modules.txt")
 	if err != nil {
