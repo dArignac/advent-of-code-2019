@@ -51,11 +51,11 @@ func main() {
 	fmt.Println("Wire two contains", len(coordinatesWire1), "coordinates")
 
 	// get the crossings
-	crossings := part1.GetCrossings(coordinatesWire0, coordinatesWire1)
-	fmt.Println("Found", len(crossings), "crossings between the 2 wires")
+	crossingPoints := part1.GetCrossings(coordinatesWire0, coordinatesWire1)
+	fmt.Println("Found", len(crossingPoints), "crossings between the 2 wires")
 
 	// calculate the nearest crossing distance
-	distance := part1.GetNearestCrossingWithDistance(crossings)
+	distance := part1.GetNearestCrossingWithDistance(crossingPoints)
 	if distance == -1.0 || distance == 0.0 {
 		fmt.Println("Calculation failed, distance was", distance)
 	}
