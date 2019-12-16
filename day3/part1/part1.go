@@ -12,19 +12,20 @@ type path struct {
 	length    int
 }
 
-type point struct {
+// Point reflects a position within the wire coordindate system
+type Point struct {
 	x int16
 	y int16
 }
 
 // CalculateNearestCrossingDistance calculates the distance to the shortest crossing
-func CalculateNearestCrossingDistance(wires []string) int {
-	coordinates := [][]point{{{x: 0, y: 0}}, {{x: 0, y: 0}}}
+func CalculateNearestCrossingDistance(wires []string) (int, []Point) {
+	coordinates := [][]Point{{{x: 0, y: 0}}, {{x: 0, y: 0}}}
 
 	for idx, wire := range wires {
 		paths, err := splitInputToPath(wire)
 		if err != nil {
-			return -1
+			return -1, nil
 		}
 
 		for _, path := range paths {
@@ -36,7 +37,7 @@ func CalculateNearestCrossingDistance(wires []string) int {
 	fmt.Println("Wire two contains", len(coordinates[1]), "coordinates")
 
 	// calculate crossings by checking if wire 2 has any points that also occure in wire 1
-	var crossings []point
+	var crossings []Point
 	for _, point := range coordinates[1] {
 		if containsElement(coordinates[0], point) {
 			crossings = append(crossings, point)
@@ -50,11 +51,11 @@ func CalculateNearestCrossingDistance(wires []string) int {
 	// calculate taxi distance for existing crossing, return the shortest
 	_, distance := getNearestCrossingWithDistance(crossings)
 
-	return int(distance)
+	return int(distance), crossings
 }
 
-func getNearestCrossingWithDistance(crossings []point) (point, float64) {
-	var nearestPoint point
+func getNearestCrossingWithDistance(crossings []Point) (Point, float64) {
+	var nearestPoint Point
 	nearestDistance := -1.0
 
 	for _, point := range crossings {
@@ -71,7 +72,7 @@ func getNearestCrossingWithDistance(crossings []point) (point, float64) {
 	return nearestPoint, nearestDistance
 }
 
-func containsElement(haystack []point, needle point) bool {
+func containsElement(haystack []Point, needle Point) bool {
 	for _, element := range haystack {
 		if element.x == needle.x && element.y == needle.y {
 			return true
@@ -81,7 +82,7 @@ func containsElement(haystack []point, needle point) bool {
 }
 
 // insertPathCoordinates creates points from the paths and inserts them into coordinates
-func insertPathCoordinates(path path, coordinates []point) []point {
+func insertPathCoordinates(path path, coordinates []Point) []Point {
 	// create points slice from path
 	points := pathToPoints(path, coordinates[len(coordinates)-1])
 
@@ -92,18 +93,18 @@ func insertPathCoordinates(path path, coordinates []point) []point {
 	return coordinates
 }
 
-func pathToPoints(path path, start point) []point {
-	result := make([]point, 0)
+func pathToPoints(path path, start Point) []Point {
+	result := make([]Point, 0)
 	for i := 1; i <= path.length; i++ {
 		switch path.direction {
 		case "R":
-			result = append(result, point{x: start.x + int16(i), y: start.y})
+			result = append(result, Point{x: start.x + int16(i), y: start.y})
 		case "D":
-			result = append(result, point{x: start.x, y: start.y - int16(i)})
+			result = append(result, Point{x: start.x, y: start.y - int16(i)})
 		case "L":
-			result = append(result, point{x: start.x - int16(i), y: start.y})
+			result = append(result, Point{x: start.x - int16(i), y: start.y})
 		case "U":
-			result = append(result, point{x: start.x, y: start.y + int16(i)})
+			result = append(result, Point{x: start.x, y: start.y + int16(i)})
 		}
 	}
 	return result
