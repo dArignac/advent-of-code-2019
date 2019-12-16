@@ -1,12 +1,14 @@
-package part1
+package day2
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
 )
 
+// LoadProgramCodeFromFile loads the contents of the input file as tring
 func LoadProgramCodeFromFile() (string, error) {
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -23,6 +25,7 @@ func LoadProgramCodeFromFile() (string, error) {
 	return content, nil
 }
 
+// ConvertProgramCode converts the program code into a slice
 func ConvertProgramCode(code string) ([]int, error) {
 	var result []int
 
@@ -37,6 +40,7 @@ func ConvertProgramCode(code string) ([]int, error) {
 	return result, nil
 }
 
+// FixIntcodeProgramCode fixes the program code by the following logic
 // read the first 4 ints:
 // 0 = Opcode
 // 1 = position of first value
@@ -73,4 +77,40 @@ func FixIntcodeProgramCode(code []int, start int) []int {
 		code = FixIntcodeProgramCode(code, nextStart)
 	}
 	return code
+}
+
+// FindInputsForDesiredOutput searches the input values to get the given output.
+func FindInputsForDesiredOutput(intCode string, output int) (int, int) {
+	// grab the inital Intcode
+	// convert inputs to []int slice
+	code, err := ConvertProgramCode(intCode)
+	if err != nil {
+		fmt.Println("Unable to convert program code")
+		return 0, 0
+	}
+
+	// value range for noun and verb is 0-99
+	noun := 0
+	verb := 0
+	for noun < 100 {
+		for verb < 100 {
+			iterationCode := make([]int, len(code))
+			copy(iterationCode, code)
+			// iterationCode := append([]int(nil), code...)
+			iterationCode[1] = noun
+			iterationCode[2] = verb
+
+			result := FixIntcodeProgramCode(iterationCode, 0)
+			if result[0] == output {
+				return noun, verb
+			}
+
+			verb++
+		}
+		verb = 0
+		noun++
+	}
+
+	// FIXME remove
+	return 0, 0
 }
