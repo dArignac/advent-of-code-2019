@@ -9,8 +9,8 @@ func TestMatchesRules(t *testing.T) {
 	assert.False(t, matchesRules(223450, 1))
 	assert.False(t, matchesRules(123789, 1))
 	assert.True(t, matchesRules(112233, 2))
-	assert.True(t, matchesRules(123444, 2))
-	assert.False(t, matchesRules(111122, 2))
+	assert.False(t, matchesRules(123444, 2))
+	assert.True(t, matchesRules(111122, 2))
 }
 
 func TestNumberToSlice(t *testing.T) {
