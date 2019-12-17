@@ -9,5 +9,9 @@ import (
 func main() {
 	fmt.Println("Advent of Code - Day 4 - Part 1")
 	fmt.Println("===============================")
-	fmt.Println("The password count matching the rules is", day4.ResolvePasswordCount())
+	fmt.Println("The password count matching the rules is", day4.ResolvePasswordCount(1))
+	fmt.Println("")
+	fmt.Println("Advent of Code - Day 4 - Part 2")
+	fmt.Println("===============================")
+	fmt.Println("The password count matching the rules is", day4.ResolvePasswordCount(2))
 }

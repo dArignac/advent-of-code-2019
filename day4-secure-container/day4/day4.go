@@ -6,19 +6,24 @@ import (
 )
 
 // ResolvePasswordCount resolves the password count by checking the rules for all numbers in the range.
-func ResolvePasswordCount() int {
+func ResolvePasswordCount(part uint8) int {
 	counter := 0
 	for i := 256310; i <= 732736; i++ {
-		if matchesRules(i) {
+		if matchesRules(i, part) {
 			counter++
 		}
 	}
 	return counter
 }
 
-func matchesRules(number int) bool {
+func matchesRules(number int, part uint8) bool {
 	digits := numberToSlice(number)
-	return hasTwoAdjacentDigits(digits) && hasNeverDecreasingDigits(digits)
+	if part == 1 {
+		return hasTwoAdjacentDigits(digits) && hasNeverDecreasingDigits(digits)
+	} else if part == 2 {
+		return hasTwoAdjacentDigitsAdvanced(digits) && hasNeverDecreasingDigits(digits)
+	}
+	return false
 }
 
 func hasNeverDecreasingDigits(digits []int) bool {
@@ -42,6 +47,31 @@ func hasTwoAdjacentDigits(digits []int) bool {
 			return true
 		}
 	}
+	return false
+}
+
+func hasTwoAdjacentDigitsAdvanced(digits []int) bool {
+	results := make(map[int]uint)
+
+	for i, v := range digits {
+		if i+1 == len(digits) {
+			break
+		}
+		if v == digits[i+1] {
+			if results[v] == 0 {
+				results[v] = 2
+			} else {
+				results[v]++
+			}
+		}
+	}
+
+	for _, v := range results {
+		if v == 2 {
+			return true
+		}
+	}
+
 	return false
 }
 

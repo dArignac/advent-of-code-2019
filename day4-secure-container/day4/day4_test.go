@@ -5,9 +5,12 @@ import "testing"
 import "github.com/stretchr/testify/assert"
 
 func TestMatchesRules(t *testing.T) {
-	assert.True(t, matchesRules(111111))
-	assert.False(t, matchesRules(223450))
-	assert.False(t, matchesRules(123789))
+	assert.True(t, matchesRules(111111, 1))
+	assert.False(t, matchesRules(223450, 1))
+	assert.False(t, matchesRules(123789, 1))
+	assert.True(t, matchesRules(112233, 2))
+	assert.True(t, matchesRules(123444, 2))
+	assert.False(t, matchesRules(111122, 2))
 }
 
 func TestNumberToSlice(t *testing.T) {
@@ -22,6 +25,14 @@ func TestHasTwoAdjacentDigits(t *testing.T) {
 	assert.True(t, hasTwoAdjacentDigits([]int{1, 1, 3, 4, 5, 6}))
 	assert.True(t, hasTwoAdjacentDigits([]int{1, 1, 3, 4, 4, 6}))
 	assert.False(t, hasTwoAdjacentDigits([]int{1, 2, 3, 4, 5, 6}))
+}
+
+func TestHasTwoAdjacentDigitsAdvanced(t *testing.T) {
+	assert.True(t, hasTwoAdjacentDigitsAdvanced([]int{1, 2, 2, 3, 4, 5}))
+	assert.True(t, hasTwoAdjacentDigitsAdvanced([]int{1, 2, 5, 3, 5, 5}))
+	assert.False(t, hasTwoAdjacentDigitsAdvanced([]int{1, 1, 1, 4, 5, 6}))
+	assert.True(t, hasTwoAdjacentDigitsAdvanced([]int{1, 1, 3, 4, 4, 4}))
+	assert.False(t, hasTwoAdjacentDigitsAdvanced([]int{1, 2, 3, 4, 5, 6}))
 }
 
 func TestHasNeverDecreasingDigits(t *testing.T) {

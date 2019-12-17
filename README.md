@@ -19,6 +19,6 @@ To execute the tests run `go ./...` from the root or any day folder to just run 
 | [Day 1: The Tyranny of the Rocket Equation](https://github.com/dArignac/advent-of-code-2019/tree/master/day1-the-tyranny-of-rocket-equation) | ✔ | ✔ |
 | [Day 2: 1202 Program Alarm](https://github.com/dArignac/advent-of-code-2019/tree/master/day2-program-alert) | ✔ | ✔ |
 | [Day 3: Crossed Wires](https://github.com/dArignac/advent-of-code-2019/tree/master/day3-crossed-wires) | ✔ | ✔ |
-| [Day 4: Secure Container](https://github.com/dArignac/advent-of-code-2019/tree/master/day4-secure-container) | ✔ | ⏳ |
+| [Day 4: Secure Container](https://github.com/dArignac/advent-of-code-2019/tree/master/day4-secure-container) | ✔ | ✔ |
 
 ![](https://media.giphy.com/media/3oz8xIGBOOz0fJuY2k/source.gif)
