@@ -55,7 +55,8 @@ func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 		code[code[start+1]] = input
 	case 4:
 		valuesInInstruction = 2
-		*output = append(*output, code[code[start+1]])
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		*output = append(*output, value1)
 	case 5:
 		value1 := getParameterValue((instruction/100)%10, start+1)
 		if value1 != 0 {

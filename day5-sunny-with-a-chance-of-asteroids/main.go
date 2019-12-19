@@ -28,7 +28,18 @@ func main() {
 	fmt.Println("Outputs are")
 	fmt.Println(output)
 
-	// fmt.Println("")
-	// fmt.Println("Advent of Code - Day 5 - Part 2")
-	// fmt.Println("===============================")
+	code, err = helper.ConvertProgramCode(input)
+	if err != nil {
+		fmt.Println("Unable to convert input to program code")
+		return
+	}
+
+	fmt.Println("")
+	fmt.Println("Advent of Code - Day 5 - Part 2")
+	fmt.Println("===============================")
+	fmt.Println("Now running the program code with initial position 5:")
+	output = []int{}
+	day5.RunProgramCode(code, 5, 0, &output)
+	fmt.Println("Outputs are")
+	fmt.Println(output)
 }
