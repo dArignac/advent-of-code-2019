@@ -2,24 +2,8 @@ package day2
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
+	"github.com/dArignac/advent-of-code-2019/helper"
 )
-
-// ConvertProgramCode converts the program code into a slice
-func ConvertProgramCode(code string) ([]int, error) {
-	var result []int
-
-	for _, v := range strings.Split(code, ",") {
-		step, err := strconv.Atoi(v)
-		if err != nil {
-			return nil, err
-		}
-		result = append(result, step)
-	}
-
-	return result, nil
-}
 
 // FixIntcodeProgramCode fixes the program code by the following logic
 // read the first 4 ints:
@@ -64,7 +48,7 @@ func FixIntcodeProgramCode(code []int, start int) []int {
 func FindInputsForDesiredOutput(intCode string, output int) (int, int) {
 	// grab the initial Intcode
 	// convert inputs to []int slice
-	code, err := ConvertProgramCode(intCode)
+	code, err := helper.ConvertProgramCode(intCode)
 	if err != nil {
 		fmt.Println("Unable to convert program code")
 		return 0, 0

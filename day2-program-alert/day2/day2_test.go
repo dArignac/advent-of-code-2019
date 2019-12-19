@@ -4,16 +4,18 @@ import "testing"
 
 import "github.com/stretchr/testify/assert"
 
+import "github.com/dArignac/advent-of-code-2019/helper"
+
 func TestConvertProgramCode(t *testing.T) {
-	r1, e1 := ConvertProgramCode("0,1,2,3")
+	r1, e1 := helper.ConvertProgramCode("0,1,2,3")
 	assert.Nil(t, e1)
 	assert.Equal(t, r1, []int{0, 1, 2, 3})
 
-	r2, e2 := ConvertProgramCode("7,129,18,44")
+	r2, e2 := helper.ConvertProgramCode("7,129,18,44")
 	assert.Nil(t, e2)
 	assert.Equal(t, r2, []int{7, 129, 18, 44})
 
-	r3, e3 := ConvertProgramCode("")
+	r3, e3 := helper.ConvertProgramCode("")
 	assert.NotNil(t, e3)
 	assert.Equal(t, []int(nil), r3)
 }
