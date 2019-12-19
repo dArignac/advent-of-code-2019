@@ -9,10 +9,14 @@ package day5
 //
 // Instructions:
 // 2 rightmost numbers == Opcode:
-// 		1 - add first and second value
-// 		2 - multiply first and second value
-// 		3 - take input and write position given on next param
-// 		4 - output the next param
+// 		1 - add first and second parameter
+// 		2 - multiply first and second parameter
+// 		3 - take input and write to position given in first parameter
+// 		4 - output the first parameter
+//		5 - if first param is not zero, set instruction pointer to value of second parameter
+//		6 - if first param is zero, set instruction pointer to value of second parameter
+//		7 - if first param < second param, store "1" to position of third params, else "0"
+//		8 - if first param == second param, store "1" to position of third params, else "0"
 // 		99 - exit
 // The other value going RTL are the parameter modes for each parameter the opcode takes.
 // 	0 - position mode (take value from this position)
@@ -22,7 +26,7 @@ package day5
 // After executing the opcode, step forward the amount of operations done and repeat.
 func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 	// default for input and output
-	valuesInInstruction := 2
+	valuesInInstruction := 0
 	instruction := code[start]
 	opcode := instruction % 100
 
@@ -33,33 +37,60 @@ func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 		return code[code[position]]
 	}
 
-	if opcode == 99 {
-		return code
-	}
-
-	// addition and multiplication
-	if opcode == 1 || opcode == 2 {
+	switch opcode {
+	case 1:
 		valuesInInstruction = 4
 		value1 := getParameterValue((instruction/100)%10, start+1)
 		value2 := getParameterValue((instruction/100)/10, start+2)
 		resultPosition := code[start+3]
-		if opcode == 1 {
-			code[resultPosition] = value1 + value2
-		} else {
-			code[resultPosition] = value1 * value2
-		}
-	}
-
-	if opcode == 3 {
+		code[resultPosition] = value1 + value2
+	case 2:
+		valuesInInstruction = 4
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		value2 := getParameterValue((instruction/100)/10, start+2)
+		resultPosition := code[start+3]
+		code[resultPosition] = value1 * value2
+	case 3:
+		valuesInInstruction = 2
 		code[code[start+1]] = input
-	}
-
-	if opcode == 4 {
+	case 4:
+		valuesInInstruction = 2
 		*output = append(*output, code[code[start+1]])
-	}
-
-	// invalid, just return
-	if opcode != 99 && (opcode > 4 || opcode < 0) {
+	case 5:
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		if value1 != 0 {
+			start = getParameterValue((instruction/100)/10, start+2)
+		} else {
+			valuesInInstruction = 3
+		}
+	case 6:
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		if value1 == 0 {
+			start = getParameterValue((instruction/100)/10, start+2)
+		} else {
+			valuesInInstruction = 3
+		}
+	case 7:
+		valuesInInstruction = 4
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		value2 := getParameterValue((instruction/100)/10, start+2)
+		if value1 < value2 {
+			code[code[start+3]] = 1
+		} else {
+			code[code[start+3]] = 0
+		}
+	case 8:
+		valuesInInstruction = 4
+		value1 := getParameterValue((instruction/100)%10, start+1)
+		value2 := getParameterValue((instruction/100)/10, start+2)
+		if value1 == value2 {
+			code[code[start+3]] = 1
+		} else {
+			code[code[start+3]] = 0
+		}
+	case 99:
+		return code
+	default:
 		return code
 	}
 
