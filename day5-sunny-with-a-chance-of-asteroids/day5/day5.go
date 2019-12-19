@@ -1,7 +1,5 @@
 package day5
 
-import "fmt"
-
 // RunProgramCode runs the following program logic
 // read the first 4 ints:
 // 0 = Instructions
@@ -23,13 +21,12 @@ import "fmt"
 //
 // After executing the opcode, step forward the amount of operations done and repeat.
 func RunProgramCode(code []int, input int, start int, output *[]int) []int {
-	// default for add and multiply
-	valuesInInstruction := 4
+	// default for input and output
+	valuesInInstruction := 2
 	instruction := code[start]
 	opcode := instruction % 100
 
 	getParameterValue := func(mode, position int) int {
-		fmt.Println("mode", mode, "position", position)
 		if mode == 1 {
 			return code[position]
 		}
@@ -42,6 +39,7 @@ func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 
 	// addition and multiplication
 	if opcode == 1 || opcode == 2 {
+		valuesInInstruction = 4
 		value1 := getParameterValue((instruction/100)%10, start+1)
 		value2 := getParameterValue((instruction/100)/10, start+2)
 		resultPosition := code[start+3]
@@ -52,8 +50,13 @@ func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 		}
 	}
 
-	if opcode == 2 || opcode == 3 {
-		// FIXME implement
+	if opcode == 3 {
+		code[code[start+1]] = input
+	}
+
+	if opcode == 4 {
+		x := code[code[start+1]]
+		*output = append(*output, x)
 	}
 
 	// invalid, just return

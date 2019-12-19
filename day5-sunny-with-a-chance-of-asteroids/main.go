@@ -23,7 +23,10 @@ func main() {
 	}
 
 	fmt.Println("Now running the program code with initial position 1:")
-	day5.RunProgramCode(code, 1)
+	output := []int{}
+	day5.RunProgramCode(code, 1, 0, &output)
+	fmt.Println("Outputs are")
+	fmt.Println(output)
 
 	// fmt.Println("")
 	// fmt.Println("Advent of Code - Day 5 - Part 2")

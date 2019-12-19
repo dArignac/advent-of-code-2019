@@ -48,14 +48,14 @@ func TestFixIntcodeProgramCodeMultiplication(t *testing.T) {
 
 	code = []int{2, 4, 4, 5, 99, 0}
 	assert.Equal(t, []int{2, 4, 4, 5, 99, 9801}, RunProgramCode(code, 0, 0, &output))
+
+	code = []int{1002, 4, 3, 4, 33}
+	assert.Equal(t, []int{1002, 4, 3, 4, 99}, RunProgramCode(code, 0, 0, &output))
 }
 
 func TestFixIntcodeProgramCodeInputOutput(t *testing.T) {
-	// code = []int{3, 0, 4, 0, 99}
-	// RunProgramCode(code, 666, 0, &output)
-	// assert.Equal(t, output, []int{666})
-
-	// code = []int{1002, 4, 3, 4, 33}
-	// output = []int{}
-	// assert.Equal(t, []int{1002, 4, 3, 4, 99}, RunProgramCode(code, 0, 0, &output))
+	output := []int{}
+	code := []int{3, 0, 4, 0, 99}
+	assert.Equal(t, code, RunProgramCode(code, 666, 0, &output))
+	assert.Equal(t, []int{666}, output)
 }
