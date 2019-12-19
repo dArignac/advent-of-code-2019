@@ -55,12 +55,11 @@ func RunProgramCode(code []int, input int, start int, output *[]int) []int {
 	}
 
 	if opcode == 4 {
-		x := code[code[start+1]]
-		*output = append(*output, x)
+		*output = append(*output, code[code[start+1]])
 	}
 
 	// invalid, just return
-	if opcode != 99 && (opcode > 3 || opcode < 0) {
+	if opcode != 99 && (opcode > 4 || opcode < 0) {
 		return code
 	}
 
