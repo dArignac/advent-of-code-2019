@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/dArignac/advent-of-code-2019/day2-program-alert/day2"
+	"github.com/dArignac/advent-of-code-2019/helper"
 )
 
 func main() {
@@ -11,7 +12,7 @@ func main() {
 	fmt.Println("===============================")
 
 	// load the inputs as string
-	codeString, err := day2.LoadProgramCodeFromFile()
+	codeString, err := helper.LoadFileContent()
 	if err != nil {
 		fmt.Println("Unable to load program code from file")
 		return
