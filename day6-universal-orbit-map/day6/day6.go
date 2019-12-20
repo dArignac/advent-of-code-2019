@@ -12,8 +12,11 @@ type Node struct {
 	Parent   *Node
 }
 
-func BulkInsertIntoTree() {
-
+func BulkCreateTree(values []string) Node {
+	// FIXME need to find COM)XXX
+	// and start from there,
+	// then search for XXX)YYY and continue
+	return Node{}
 }
 
 func insertIntoTree(root *Node, value string) error {
