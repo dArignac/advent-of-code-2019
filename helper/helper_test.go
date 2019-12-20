@@ -12,6 +12,20 @@ func TestLoadFileContent(t *testing.T) {
 	assert.Equal(t, []string{"line0", "line1"}, content)
 }
 
+func TestConvertStringArrayToIntArray(t *testing.T) {
+	values, err := ConvertStringArrayToIntArray([]string{})
+	assert.Nil(t, err)
+	assert.Equal(t, []int(nil), values)
+
+	values, err = ConvertStringArrayToIntArray([]string{"1", "2", "576182"})
+	assert.Nil(t, err)
+	assert.Equal(t, []int{1, 2, 576182}, values)
+
+	values, err = ConvertStringArrayToIntArray([]string{"1", "A", "576182"})
+	assert.NotNil(t, err)
+	assert.Nil(t, values)
+}
+
 func TestSplitStringToIntArray(t *testing.T) {
 	r1, e1 := SplitStringToIntArray("0,1,2,3")
 	assert.Nil(t, e1)

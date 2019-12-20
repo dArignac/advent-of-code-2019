@@ -24,6 +24,19 @@ func LoadFileContent() ([]string, error) {
 	return content, nil
 }
 
+// ConvertStringArrayToIntArray converts the given string array to int array. On any conversion issue returns the error.
+func ConvertStringArrayToIntArray(input []string) ([]int, error) {
+	var result []int
+	for _, value := range input {
+		convertedValue, err := strconv.Atoi(value)
+		if err != nil {
+			return nil, err
+		}
+		result = append(result, convertedValue)
+	}
+	return result, nil
+}
+
 // SplitStringToIntArray converts the given program code into an integer slice
 func SplitStringToIntArray(code string) ([]int, error) {
 	var result []int
