@@ -12,11 +12,30 @@ type Node struct {
 	Parent   *Node
 }
 
-func BulkCreateTree(values []string) Node {
+// BulkCreateTree creates a tree from the given, unsorted values representing object relations
+func BulkCreateTree(values []string) (root Node) {
 	// FIXME need to find COM)XXX
 	// and start from there,
 	// then search for XXX)YYY and continue
-	return Node{}
+
+	searchForLeftObject := func(list []string, name string) []string {
+		for _, value := range list {
+			values := strings.Split(value, ")")
+			if values[0] == name {
+				return values
+			}
+		}
+		return []string{}
+	}
+
+	root = Node{Name: "COM", Parent: nil, Children: nil}
+
+	// find COM as starting point
+	startValues := searchForLeftObject(values, "COM")
+
+	// FIXME continue
+
+	return
 }
 
 func insertIntoTree(root *Node, value string) error {
