@@ -16,8 +16,6 @@ func main() {
 		return
 	}
 
-	fmt.Println(input)
-
 	// fmt.Println("")
 	// fmt.Println("Advent of Code - Day 6 - Part 2")
 	// fmt.Println("===============================")

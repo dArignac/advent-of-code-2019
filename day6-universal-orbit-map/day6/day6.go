@@ -7,9 +7,9 @@ import (
 
 // Node represents a space object
 type Node struct {
-	name     string
-	children []*Node
-	parent   *Node
+	Name     string
+	Children []*Node
+	Parent   *Node
 }
 
 func BulkInsertIntoTree() {
@@ -29,24 +29,24 @@ func insertIntoTree(root *Node, value string) error {
 	// search right object in tree, if not exist, create it
 	right := findNodeByName(root, nodes[1])
 	if right == nil {
-		right = &Node{name: nodes[1], parent: left, children: nil}
-		left.children = append(left.children, right)
+		right = &Node{Name: nodes[1], Parent: left, Children: nil}
+		left.Children = append(left.Children, right)
 	}
 
 	return nil
 }
 
 func findNodeByName(root *Node, name string) *Node {
-	if root.name == name {
+	if root.Name == name {
 		return root
 	}
 
-	for _, child := range root.children {
-		if child.name == name {
+	for _, child := range root.Children {
+		if child.Name == name {
 			return child
 		}
 
-		if len(child.children) > 0 {
+		if len(child.Children) > 0 {
 			result := findNodeByName(child, name)
 			if result != nil {
 				return result
