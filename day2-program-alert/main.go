@@ -19,7 +19,7 @@ func main() {
 	}
 
 	// convert inputs to []int slice
-	code, err := helper.ConvertProgramCode(codeString)
+	code, err := helper.SplitStringToIntArray(codeString)
 	if err != nil {
 		fmt.Println("Unable to convert program code")
 		return

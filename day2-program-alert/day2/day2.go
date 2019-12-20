@@ -48,7 +48,7 @@ func FixIntcodeProgramCode(code []int, start int) []int {
 func FindInputsForDesiredOutput(intCode string, output int) (int, int) {
 	// grab the initial Intcode
 	// convert inputs to []int slice
-	code, err := helper.ConvertProgramCode(intCode)
+	code, err := helper.SplitStringToIntArray(intCode)
 	if err != nil {
 		fmt.Println("Unable to convert program code")
 		return 0, 0

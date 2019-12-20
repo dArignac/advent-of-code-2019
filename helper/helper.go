@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// LoadFileContent loads the contents of the input file as string
+// LoadFileContent loads the contents of the input file as string, only first line
 func LoadFileContent() (string, error) {
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -24,8 +24,8 @@ func LoadFileContent() (string, error) {
 	return content, nil
 }
 
-// ConvertProgramCode converts the given program code into an integer slice
-func ConvertProgramCode(code string) ([]int, error) {
+// SplitStringToIntArray converts the given program code into an integer slice
+func SplitStringToIntArray(code string) ([]int, error) {
 	var result []int
 
 	for _, v := range strings.Split(code, ",") {
