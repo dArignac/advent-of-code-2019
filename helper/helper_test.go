@@ -9,7 +9,7 @@ import (
 func TestLoadFileContent(t *testing.T) {
 	content, err := LoadFileContent()
 	assert.Nil(t, err)
-	assert.Equal(t, "demo", content)
+	assert.Equal(t, []string{"line0", "line1"}, content)
 }
 
 func TestSplitStringToIntArray(t *testing.T) {

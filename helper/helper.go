@@ -8,17 +8,17 @@ import (
 )
 
 // LoadFileContent loads the contents of the input file as string, only first line
-func LoadFileContent() (string, error) {
+func LoadFileContent() ([]string, error) {
 	file, err := os.Open("input.txt")
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer file.Close()
 
-	var content string
+	var content []string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		content = scanner.Text()
+		content = append(content, scanner.Text())
 	}
 
 	return content, nil

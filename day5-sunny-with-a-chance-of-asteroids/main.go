@@ -16,7 +16,7 @@ func main() {
 		return
 	}
 
-	code, err := helper.SplitStringToIntArray(input)
+	code, err := helper.SplitStringToIntArray(input[0])
 	if err != nil {
 		fmt.Println("Unable to convert input to program code")
 		return
@@ -28,7 +28,7 @@ func main() {
 	fmt.Println("Outputs are")
 	fmt.Println(output)
 
-	code, err = helper.SplitStringToIntArray(input)
+	code, err = helper.SplitStringToIntArray(input[0])
 	if err != nil {
 		fmt.Println("Unable to convert input to program code")
 		return

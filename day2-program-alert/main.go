@@ -12,14 +12,14 @@ func main() {
 	fmt.Println("===============================")
 
 	// load the inputs as string
-	codeString, err := helper.LoadFileContent()
+	codes, err := helper.LoadFileContent()
 	if err != nil {
 		fmt.Println("Unable to load program code from file")
 		return
 	}
 
 	// convert inputs to []int slice
-	code, err := helper.SplitStringToIntArray(codeString)
+	code, err := helper.SplitStringToIntArray(codes[0])
 	if err != nil {
 		fmt.Println("Unable to convert program code")
 		return
@@ -39,7 +39,7 @@ func main() {
 	fmt.Println("Advent of Code - Day 2 - Part 2")
 	fmt.Println("===============================")
 
-	noun, verb := day2.FindInputsForDesiredOutput(codeString, 19690720)
+	noun, verb := day2.FindInputsForDesiredOutput(codes[0], 19690720)
 	fmt.Println("100 * noun * verb for output 19690720")
 	fmt.Printf("Noun: %d, Verb: %d, Result: %d", noun, verb, 100*noun+verb)
 }
