@@ -22,7 +22,8 @@ func main() {
 	day6.RecursiveCountOrbits(&tree, &counter)
 	fmt.Println("The total number of direct and indirect orbits is", counter)
 
-	// fmt.Println("")
-	// fmt.Println("Advent of Code - Day 6 - Part 2")
-	// fmt.Println("===============================")
+	fmt.Println("")
+	fmt.Println("Advent of Code - Day 6 - Part 2")
+	fmt.Println("===============================")
+	fmt.Println("Shortest path between YOU and SAN has lenght", day6.FindShortestPath(&tree))
 }

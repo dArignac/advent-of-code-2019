@@ -3,6 +3,8 @@ package day6
 import (
 	"errors"
 	"strings"
+
+	"github.com/dArignac/advent-of-code-2019/helper"
 )
 
 // Node represents a space object
@@ -24,6 +26,74 @@ func (node Node) getOrbitCount() int {
 	}
 
 	return 1 + (*node.Parent).getOrbitCount()
+}
+
+func (node Node) hasParent() bool {
+	return node.Parent != nil
+}
+
+func (node Node) hasChildren() bool {
+	return len(node.Children) > 0
+}
+
+// FindShortestPath finds the shortest path between YOU and SAN
+func FindShortestPath(tree *Node) int {
+	start := findNodeByName(tree, "YOU")
+	paths := [][]string{}
+	walkTree(start, []string{}, &paths)
+
+	// removes all walked paths that do not end at SAN
+	filterPaths := func(paths [][]string) [][]string {
+		result := [][]string{}
+		for _, values := range paths {
+			if values[len(values)-1] == "SAN" {
+				result = append(result, values)
+			}
+		}
+		return result
+	}
+
+	getShortestPath := func(paths [][]string) int {
+		shortest := -1
+		for _, values := range paths {
+			if shortest == -1 || len(values) < shortest {
+				shortest = len(values)
+			}
+		}
+		return shortest
+	}
+
+	return getShortestPath(filterPaths(paths)) - 4 + 1
+}
+
+func walkTree(node *Node, path []string, finalPaths *[][]string) {
+	path = append(path, (*node).Name)
+
+	// recursion ends,
+	// when COM or SAN was reached
+	// or no parents or children are there
+	isEndOfRecursion := func() bool {
+		return (*node).Name == "COM" || (*node).Name == "SAN" || (!node.hasParent() && !node.hasChildren())
+	}
+
+	if !isEndOfRecursion() {
+
+		if node.hasParent() {
+			if !helper.HasInList(path, (*node.Parent).Name) {
+				walkTree(node.Parent, path, finalPaths)
+			}
+		}
+
+		if node.hasChildren() {
+			for _, child := range node.Children {
+				if !helper.HasInList(path, (*child).Name) {
+					walkTree(child, path, finalPaths)
+				}
+			}
+		}
+	}
+
+	*finalPaths = append(*finalPaths, path)
 }
 
 // RecursiveCountOrbits counts the orbits for all nodes down or equal to the given node

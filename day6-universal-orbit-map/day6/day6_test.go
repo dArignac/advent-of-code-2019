@@ -6,6 +6,24 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestFindShortestPath(t *testing.T) {
+	tree := CreateTree([]string{
+		"COM)B",
+		"B)C",
+		"C)D",
+		"D)E",
+		"E)F",
+		"B)G",
+		"G)H",
+		"D)I",
+		"E)J",
+		"J)K",
+		"K)L",
+		"K)YOU",
+		"I)SAN"})
+	assert.Equal(t, 4, FindShortestPath(&tree))
+}
+
 func TestWalkTree(t *testing.T) {
 	tree := CreateTree([]string{"B)C", "J)K", "C)D", "D)E", "E)F", "B)G", "COM)B", "G)H", "D)I", "E)J", "K)L"})
 	counter := 0

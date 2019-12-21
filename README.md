@@ -24,6 +24,6 @@ To execute the tests run `go ./...` from the root or any day folder to just run 
 | [Day 3: Crossed Wires](https://github.com/dArignac/advent-of-code-2019/tree/master/day3-crossed-wires) | ✔ | ✔ |
 | [Day 4: Secure Container](https://github.com/dArignac/advent-of-code-2019/tree/master/day4-secure-container) | ✔ | ✔ |
 | [Day 5: Sunny with a chance of Asteroids](https://github.com/dArignac/advent-of-code-2019/tree/master/day5-sunny-with-a-chance-of-asteroids) | ✔ | ✔ |
-| [Day 6: Universal Orbit Map](https://github.com/dArignac/advent-of-code-2019/tree/master/day6-universal-orbit-map) | ✔ | ⏳ |
+| [Day 6: Universal Orbit Map](https://github.com/dArignac/advent-of-code-2019/tree/master/day6-universal-orbit-map) | ✔ | ✔ |
 
 ![](https://media.giphy.com/media/3oz8xIGBOOz0fJuY2k/source.gif)
