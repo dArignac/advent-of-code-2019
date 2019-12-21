@@ -39,3 +39,10 @@ func TestSplitStringToIntArray(t *testing.T) {
 	assert.NotNil(t, e3)
 	assert.Equal(t, []int(nil), r3)
 }
+
+func TestHasInList(t *testing.T) {
+	assert.False(t, HasInList([]string{}, "A"))
+	assert.False(t, HasInList([]string{"B", "C"}, "A"))
+	assert.True(t, HasInList([]string{"A", "C"}, "A"))
+	assert.True(t, HasInList([]string{"A", "C", "A"}, "A"))
+}

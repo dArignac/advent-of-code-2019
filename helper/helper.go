@@ -51,3 +51,13 @@ func SplitStringToIntArray(code string) ([]int, error) {
 
 	return result, nil
 }
+
+// HasInList checks if the given needle is within the given haystack
+func HasInList(haystack []string, needle string) bool {
+	for _, value := range haystack {
+		if value == needle {
+			return true
+		}
+	}
+	return false
+}
