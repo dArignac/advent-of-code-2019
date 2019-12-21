@@ -17,7 +17,7 @@ func main() {
 		return
 	}
 
-	_ = day6.BulkCreateTree(input)
+	_ = day6.CreateTree(input)
 
 	// fmt.Println("")
 	// fmt.Println("Advent of Code - Day 6 - Part 2")
