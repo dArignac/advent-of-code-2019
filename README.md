@@ -6,6 +6,9 @@ I'm starting to learn the language [Go](https://golang.org/) by solving the task
 [![Go Report Card](https://goreportcard.com/badge/github.com/dArignac/advent-of-code-2019)](https://goreportcard.com/report/github.com/dArignac/advent-of-code-2019)
 [![Actions Status](https://github.com/dArignac/advent-of-code-2019/workflows/Go/badge.svg)](https://github.com/dArignac/advent-of-code-2019/actions)
 
+## Dependencies
+Run `go get -v -t -d ./...` from root.
+
 ## Tests
 To execute the tests run `go ./...` from the root or any day folder to just run the tests for the day.
 
@@ -21,6 +24,6 @@ To execute the tests run `go ./...` from the root or any day folder to just run 
 | [Day 3: Crossed Wires](https://github.com/dArignac/advent-of-code-2019/tree/master/day3-crossed-wires) | ✔ | ✔ |
 | [Day 4: Secure Container](https://github.com/dArignac/advent-of-code-2019/tree/master/day4-secure-container) | ✔ | ✔ |
 | [Day 5: Sunny with a chance of Asteroids](https://github.com/dArignac/advent-of-code-2019/tree/master/day5-sunny-with-a-chance-of-asteroids) | ✔ | ✔ |
-| [Day 6: Universal Orbit Map](https://github.com/dArignac/advent-of-code-2019/tree/master/day6-universal-orbit-map) | ⏳ | ⏳ |
+| [Day 6: Universal Orbit Map](https://github.com/dArignac/advent-of-code-2019/tree/master/day6-universal-orbit-map) | ✔ | ⏳ |
 
 ![](https://media.giphy.com/media/3oz8xIGBOOz0fJuY2k/source.gif)
