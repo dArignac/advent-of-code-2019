@@ -12,6 +12,28 @@ type Node struct {
 	Parent   *Node
 }
 
+// direct orbit = parent
+// indirect orbit = the parent's parent count up to root/COM
+func (node Node) getOrbitCount() int {
+	if node.Parent == nil {
+		return 0
+	}
+
+	if (*node.Parent).Name == "COM" {
+		return 1
+	}
+
+	return 1 + (*node.Parent).getOrbitCount()
+}
+
+// RecursiveCountOrbits counts the orbits for all nodes down or equal to the given node
+func RecursiveCountOrbits(node *Node, counter *int) {
+	*counter += (*node).getOrbitCount()
+	for _, child := range node.Children {
+		RecursiveCountOrbits(child, counter)
+	}
+}
+
 // CreateTree creates a tree from the given, unsorted values representing object relations
 func CreateTree(pairs []string) (root Node) {
 	root = Node{Name: "COM", Parent: nil, Children: nil}

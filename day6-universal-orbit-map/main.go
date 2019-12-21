@@ -17,7 +17,10 @@ func main() {
 		return
 	}
 
-	_ = day6.CreateTree(input)
+	tree := day6.CreateTree(input)
+	counter := 0
+	day6.RecursiveCountOrbits(&tree, &counter)
+	fmt.Println("The total number of direct and indirect orbits is", counter)
 
 	// fmt.Println("")
 	// fmt.Println("Advent of Code - Day 6 - Part 2")

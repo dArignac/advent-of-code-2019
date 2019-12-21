@@ -6,6 +6,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestWalkTree(t *testing.T) {
+	tree := CreateTree([]string{"B)C", "J)K", "C)D", "D)E", "E)F", "B)G", "COM)B", "G)H", "D)I", "E)J", "K)L"})
+	counter := 0
+	RecursiveCountOrbits(&tree, &counter)
+	assert.Equal(t, 42, counter)
+}
+
 func TestCreateTree(t *testing.T) {
 	// input from day 6 task
 	// 	       G - H       J - K - L
@@ -13,9 +20,8 @@ func TestCreateTree(t *testing.T) {
 	// COM - B - C - D - E - F
 	//               \
 	//                I
-	// inputSorted := []string{"COM)B", "B)C", "C)D", "D)E", "E)F", "B)G", "G)H", "D)I", "E)J", "J)K", "K)L"}
-	inputFuzzy := []string{"B)C", "J)K", "C)D", "D)E", "E)F", "B)G", "COM)B", "G)H", "D)I", "E)J", "K)L"}
-	root := CreateTree(inputFuzzy)
+	input := []string{"B)C", "J)K", "C)D", "D)E", "E)F", "B)G", "COM)B", "G)H", "D)I", "E)J", "K)L"}
+	root := CreateTree(input)
 
 	assert.NotNil(t, root)
 	assert.NotEqual(t, Node{}, root)
