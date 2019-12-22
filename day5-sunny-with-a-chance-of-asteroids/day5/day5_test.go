@@ -153,3 +153,11 @@ func TestRunProgramCodeLarge(t *testing.T) {
 	RunProgramCode(code, &inputs, 0, &output)
 	assert.Equal(t, []int{1001}, output)
 }
+
+func TestRunProgramCodeMultipleInputs(t *testing.T) {
+	outputs := []int{}
+	inputs := []int{11, 22, 33}
+	code := []int{3, 1, 3, 3, 3, 5, 99}
+	result := RunProgramCode(code, &inputs, 0, &outputs)
+	assert.Equal(t, []int{3, 11, 3, 22, 3, 33, 99}, result)
+}

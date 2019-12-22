@@ -24,7 +24,7 @@ package day5
 // If no parameter mode is given for a parameter, it is 0.
 //
 // After executing the opcode, step forward the amount of operations done and repeat.
-func RunProgramCode(code []int, input *[]int, start int, output *[]int) []int {
+func RunProgramCode(code []int, inputs *[]int, start int, output *[]int) []int {
 	// default for input and output
 	valuesInInstruction := 0
 	instruction := code[start]
@@ -52,9 +52,9 @@ func RunProgramCode(code []int, input *[]int, start int, output *[]int) []int {
 		code[resultPosition] = value1 * value2
 	case 3:
 		valuesInInstruction = 2
-		code[code[start+1]] = (*input)[0]
-		if len(*input) > 1 {
-
+		code[code[start+1]] = (*inputs)[0]
+		if len(*inputs) > 1 {
+			*inputs = append((*inputs)[:0], (*inputs)[1:]...)
 		}
 	case 4:
 		valuesInInstruction = 2
@@ -98,5 +98,5 @@ func RunProgramCode(code []int, input *[]int, start int, output *[]int) []int {
 		return code
 	}
 
-	return RunProgramCode(code, input, start+valuesInInstruction, output)
+	return RunProgramCode(code, inputs, start+valuesInInstruction, output)
 }
