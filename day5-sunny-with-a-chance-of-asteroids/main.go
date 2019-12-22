@@ -23,8 +23,9 @@ func main() {
 	}
 
 	fmt.Println("Now running the program code with initial position 1:")
+	inputs := []int{1}
 	output := []int{}
-	day5.RunProgramCode(code, 1, 0, &output)
+	day5.RunProgramCode(code, &inputs, 0, &output)
 	fmt.Println("Outputs are")
 	fmt.Println(output)
 
@@ -38,8 +39,9 @@ func main() {
 	fmt.Println("Advent of Code - Day 5 - Part 2")
 	fmt.Println("===============================")
 	fmt.Println("Now running the program code with initial position 5:")
+	inputs = []int{5}
 	output = []int{}
-	day5.RunProgramCode(code, 5, 0, &output)
+	day5.RunProgramCode(code, &inputs, 0, &output)
 	fmt.Println("Outputs are")
 	fmt.Println(output)
 }
